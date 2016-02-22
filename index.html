@@ -1,16 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html ng-app='gemStore'>
    <head>
       <meta charset="utf-8">
-      <title></title>
+      <title>Angular JS</title>
+      <link rel="stylesheet" href="styles.css" media="screen" title="no title" charset="utf-8">
    </head>
-   <body>
+   <body ng-controller='mainCtrl'>
+
+      <div  class="list-group">
+         <div  ng-repeat="gemTwo in gemsTwo | orderBy: 'price'" class="list-group-item">
+
+
+            <div ng-hide='gemTwo.soldOut' class="items">
+                  <h1 class="headings">{{gemTwo.name | uppercase}}</h1>
+                  <img ng-src="{{gemTwo.image}}" class='images' />
+                  <div class="totheside">
+
+                     <!-- <button ng-hide='gemTwo.canPurchase' type="button" name="button">Add to Cart</button> -->
+                     <section ng-init='tab = 1' class='buttons'>
+                        <ul class='tabs'>
+                           <li ng-class="{ active:tab === 1}" class='tabs tabular'><a ng-click="tab = 1"><strong>Description</strong></a></li>
+
+                           <li ng-class="{ active:tab === 2}" class='tabs tabular'><a ng-click="tab = 2"><strong>Reviews</strong></a></li>
+                        </ul>
+
+                        <h2>{{gemTwo.price | currency}}</h2>
+                     </section>
+
+                     <div ng-show="tab === 1" class="panel">
+                        <h4>Desctiption</h4>
+                        <p>{{gemTwo.description | limitTo: 100}}</p>
+                     </div>
+                     <div ng-show="tab === 2 " class="panel">
+                        <h4>Review</h4>
+                        <p>{{gemTwo.review | limitTo: 100}}</p>
+                     </div>
+               </div>
+            </div>
+
+               <button ng-hide='gemTwo.canPurchase' type="button" name="button">Add to Cart</button>
+         </div>
+      </div>
 
 
 
+      <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js'></script>
+      <script src='scripts/app.js'></script>
+      <script src='scripts/mainCtrl.js'></script>
+      <script src='scripts/mainService.js'></script>
 
-      
-      <script src='app.js'></script>
-      <script src='app.js'></script>
    </body>
 </html>
